@@ -13,6 +13,8 @@ if __name__ == '__main__':
             self.ui.setupUi(self)
             # 右上角按钮调整
             self.setWindowFlags(self.windowFlags() & ~Qt.WindowContextHelpButtonHint | Qt.WindowMinimizeButtonHint)
+            # 接受拖入
+            self.setAcceptDrops(True)
             # 绑定按钮函数
             self.ui.toolButtonTarget.clicked.connect(self.clickButtonTarget)
             self.ui.toolButtonExport.clicked.connect(self.clickButtonExport)
@@ -23,6 +25,22 @@ if __name__ == '__main__':
             self.ui.lineEditTarget.setReadOnly(True)
             self.ui.lineEditExport.setPlaceholderText('当前目录')
             self.ui.lineEditExport.setReadOnly(True)
+        # 重写拖入相关方法
+        def dragEnterEvent(self, evn):
+            # print('鼠标拖入窗口')
+            # 鼠标放开函数事件
+            evn.accept()
+        def dropEvent(self, evn):
+            # print(f'鼠标放开 {evn.posF()}')
+            path = evn.mimeData().text()
+            # print('文件路径：\n' + path)
+            # print(path[-3:])
+            if(path[-3:]=='pdf'):
+                self.ui.lineEditTarget.setText(path)
+
+        def dragMoveEvent(self, evn):
+            pass
+            # print('鼠标移动')
 
         def clickButtonTarget(self):
             fileName, fileType = QFileDialog.getOpenFileName(self, "选取文件", os.getcwd(), "PDF File(*.pdf)")
