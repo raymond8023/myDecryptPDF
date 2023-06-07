@@ -25,6 +25,8 @@ if __name__ == '__main__':
             self.ui.lineEditTarget.setReadOnly(True)
             self.ui.lineEditExport.setPlaceholderText('当前目录')
             self.ui.lineEditExport.setReadOnly(True)
+            # 调试
+            self.ui.lineEditTarget.setText("D:/Users/raymo/Desktop/附件：2023年自研云电脑政企版促销资费标准.pdf")
         # 重写拖入相关方法
         def dragEnterEvent(self, evn):
             # print('鼠标拖入窗口')
@@ -36,7 +38,7 @@ if __name__ == '__main__':
             # print('文件路径：\n' + path)
             # print(path[-3:])
             if(path[-3:]=='pdf'):
-                self.ui.lineEditTarget.setText(path)
+                self.ui.lineEditTarget.setText(path[8:])
 
         def dragMoveEvent(self, evn):
             pass
