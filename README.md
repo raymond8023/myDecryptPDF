@@ -8,8 +8,6 @@ PDF本来想选用PyMuPDF库，WORD想选用python-docx库，结果发现了一�
             evn.accept()
         def dropEvent(self, evn):
             path = evn.mimeData().text()
-            if(path[-3:]=='pdf'):
-                self.ui.lineEditTarget.setText(path)
         def dragMoveEvent(self, evn):
             pass
 
